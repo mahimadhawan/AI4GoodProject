@@ -11,6 +11,9 @@ AI4Good Project: A mood journal app to help detect & track emotions, and identif
 
 
 
+## Data 
+
+
 ## Model 1 - emotion classification
 
 
