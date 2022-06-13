@@ -1,6 +1,6 @@
 # AI4GoodProject **insert name**
 
-**insert logo 
+## **insert logo 
 
 ##
 ## Description
