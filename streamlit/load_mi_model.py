@@ -1,25 +1,22 @@
-import datetime as dt
 import re
 import pandas as pd
 import streamlit as st
 import pickle
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn import preprocessing
-
-import re
 import string
 import nltk
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 
+#references:
+# https://github.com/sebtheiler/tutorials/blob/main/twitter-sentiment/main.py
 
-
-# Set page title
+# set page title
 st.title('MI Analysis')
 
-# Load classification model
-# with st.spinner('Loading classification model...'):
 
+# load model
 loaded_model = pickle.load(open('mental_illness_rf_corpus.pkl', 'rb'))
 model = loaded_model['model']
 labels = preprocessing.LabelEncoder()
@@ -27,6 +24,7 @@ labels = loaded_model['le_mental_illness']
 corpus = loaded_model['corpus']
 
 
+# clean user input as was done to get text_clean in training data
 nltk.download('stopwords')
 stop_words = stopwords.words('english')
 more_stopwords = ['u', 'im', 'c']
@@ -50,34 +48,30 @@ def clean_user_input(text):
 
 
 
-
-### SINGLE TWEET CLASSIFICATION ###
 st.subheader('Multi-class classification of mental illness from text input')
 
-# Get sentence input, preprocess it, and convert to flair.data.Sentence format
+# get text input and detect + classify mental illness
 user_input = st.text_input('Journal entry:')
 
 if user_input != '':
 
-    #clean user input as was done to get text_clean in training data
-    # user_input = clean_user_input()
+    user_input = clean_user_input(user_input)
 
     user_input = [user_input]
 
-    # Now vectorize
+    # now vectorize
     cv = CountVectorizer(max_features=5000)
     cv.fit_transform(corpus)
     sentence = cv.transform(user_input)
 
-    # Make predictions
+    # make prediction
     y_pred = model.predict(sentence)
 
 
-    # Inverse transform of predictions
+    # inverse transform of predictions
     y_act = labels.inverse_transform(y_pred)
 
 
-    # Show predictions
     st.write('prediction is ', y_act)
 
 
