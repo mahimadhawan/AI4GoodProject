@@ -13,14 +13,24 @@ from nltk.tokenize import word_tokenize
 # https://github.com/sebtheiler/tutorials/blob/main/twitter-sentiment/main.py
 
 # set page title
-st.title('MI Analysis')
+#st.title('MI Analysis')
+apptitle = st.container()
+about_us = st.container()
 
+with apptitle:
+    st.title("Mood Journal")
+    st.text("Tell us about your day and we'll tell you how you feel :)")
+    
+with about_us:
+    st.header("About Us")
+    about_us_text = "We're doing a  project for AI4Good!"
+    st.write(about_us_text)
 
 # load model
-loaded_model = pickle.load(open('mental_illness_rf_corpus.pkl', 'rb'))
+loaded_model = pickle.load(open('bert_emotions.pkl', 'rb'))
 model = loaded_model['model']
 labels = preprocessing.LabelEncoder()
-labels = loaded_model['le_mental_illness']
+labels = loaded_model['le_emotions']
 corpus = loaded_model['corpus']
 
 
@@ -49,9 +59,15 @@ def clean_user_input(text):
 
 
 st.subheader('Multi-class classification of mental illness from text input')
+checkin =  st.container()
 
-# get text input and detect + classify mental illness
-user_input = st.text_input('Journal entry:')
+with checkin:
+    st.header("Check In")
+    st.text("Answer some questions here like it's your diary. Press enter when you're done and scroll down for your results!")
+    question1 =  "What did you do today?"
+    #answer1 = checkin.text_input(question1)
+    # get text input and detect + classify mental illness
+    user_input = st.text_input(question1)
 
 if user_input != '':
 
@@ -71,7 +87,9 @@ if user_input != '':
     # inverse transform of predictions
     y_act = labels.inverse_transform(y_pred)
 
-
-    st.write('prediction is ', y_act)
+    results = st.container()
+    with results:
+        st.header("Results")
+        st.write('It seems like you are showing symptoms of', y_act)
 
 
