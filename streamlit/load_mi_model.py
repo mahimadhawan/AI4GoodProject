@@ -26,11 +26,10 @@ with about_us:
     about_us_text = "We're doing a  project for AI4Good!"
     st.write(about_us_text)
 
-# load model
-loaded_model = pickle.load(open('bert_emotions.pkl', 'rb'))
+loaded_model = pickle.load(open('mental_illness_rf_corpus.pkl', 'rb'))
 model = loaded_model['model']
 labels = preprocessing.LabelEncoder()
-labels = loaded_model['le_emotions']
+labels = loaded_model['le_mental_illness']
 corpus = loaded_model['corpus']
 
 
