@@ -1,6 +1,6 @@
 # MoodRing - an AI4Good project
 
-https://github.com/mahimadhawan/AI4GoodProject/blob/main/logo.png?raw=true
+![alt text](https://github.com/mahimadhawan/AI4GoodProject/blob/main/logo.png?raw=true)
 
 ##
 ## Description

@@ -1,0 +1,19 @@
+Instructions:
+
+1) Make sure requirements (listed below) are installed on your machine
+2) Download this 'streamlit' folder
+3) Unzip 'models.zip'
+4) Navigate to the folder on your terminal
+5) type 'streamlit run Home.py'
+
+
+
+Requirements:
+streamlit
+transformers
+torch
+nltk
+pandas
+sklearn
+
+
