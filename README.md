@@ -1,6 +1,6 @@
-# AI4GoodProject **insert name**
+# MoodRing - an AI4Good project
 
-## **insert logo 
+https://github.com/mahimadhawan/AI4GoodProject/blob/main/logo.png?raw=true
 
 ##
 ## Description
