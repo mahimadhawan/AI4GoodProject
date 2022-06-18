@@ -102,6 +102,8 @@ def preprocess(text):
     return text
 
 
+
+# this function is from https://www.kaggle.com/code/andreshg/nlp-glove-bert-tf-idf-lstm-explained
 def clean_user_input(text):
     nltk.download('stopwords')
     stop_words = stopwords.words('english')
