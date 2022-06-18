@@ -59,21 +59,50 @@ def load_mi_model():
     return data
 
 
-def predictor(): 
-    """ predictor function takes text box as input and returns prediction(s) """
 
-    txt = txt = st.text_area('Enter journal text here', '')
+# preprocessing functions for removing characters etc from: https://www.kaggle.com/code/oknashar/emotion-detection-deep-learning
+def remove_hashtags(text):
+    text = re.sub(r'@\w+', '', text)
+    return text
+def remove_emojis(text):
+    text = [x for x in text.split(' ') if x.isalpha()]
+    text = ' '.join(text)
+    return text
+def remove_emoji(string):
+    emoji_pattern = re.compile("["
+                               u"\U0001F600-\U0001F64F"  # emoticons
+                               u"\U0001F300-\U0001F5FF"  # symbols & pictographs
+                               u"\U0001F680-\U0001F6FF"  # transport & map symbols
+                               u"\U0001F1E0-\U0001F1FF"  # flags (iOS)
+                               u"\U00002500-\U00002BEF"  # chinese char
+                               u"\U00002702-\U000027B0"
+                               u"\U00002702-\U000027B0"
+                               u"\U000024C2-\U0001F251"
+                               u"\U0001f926-\U0001f937"
+                               u"\U00010000-\U0010ffff"
+                               u"\u2640-\u2642"
+                               u"\u2600-\u2B55"
+                               u"\u200d"
+                               u"\u23cf"
+                               u"\u23e9"
+                               u"\u231a"
+                               u"\ufe0f"  # dingbats
+                               u"\u3030"
+                               "]+", flags=re.UNICODE)
+    return emoji_pattern.sub(r'', string)
 
-    # TOODO
-    # need to return both emotions predictor as well as mental illness predictor IF mental illness prediction does not equal 'neither'
+def remove_urls(text):
+    text = re.sub(r'http\S+', '', text)
+    return text
 
-    return(prediction)
+def preprocess(text):
+    text = remove_hashtags(text)
+    text = remove_emoji(text)
+    text = remove_urls(text)
+    return text
 
 
-
-def clean_user_input_mi(text):
-    """ clean user input for mental illness model """
-    
+def clean_user_input(text):
     nltk.download('stopwords')
     stop_words = stopwords.words('english')
     more_stopwords = ['u', 'im', 'c']
@@ -94,15 +123,19 @@ def clean_user_input_mi(text):
     #stemming
     text = ' '.join(stemmer.stem(word) for word in text.split(' '))
     
-    return text    
+    return preprocess(text)
+
+
+
+
 
 
 def use_mi_model(text):
     """ use mental illness model & return results to user """
     if text != '':
-        text = clean_user_input_mi(text)
+        text = clean_user_input(text)
         
-        # use MI model
+        # load model
         loaded_model = load_mi_model()
         
         model = loaded_model['model']
@@ -252,8 +285,6 @@ if journal_entry != '':
 
     mental_illness = use_mi_model(journal_entry)
     display_mi_results(mental_illness)
-
-    st.header("Results")
 
 
 
