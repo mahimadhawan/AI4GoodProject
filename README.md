@@ -18,7 +18,7 @@ AI4Good Project: A mood journal app to help detect & track emotions, and identif
 
 
 
-## Model 1 - emotion classification
+## Emotion classification
 
 Input:
 Output:
@@ -28,7 +28,7 @@ Data:
 
 
 
-## Model 2 - mental illness detection
+## Mental illness detection
 
 Input:
 Output:
