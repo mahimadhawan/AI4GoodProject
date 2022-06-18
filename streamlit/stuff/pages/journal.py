@@ -54,7 +54,7 @@ st.write(about_us_text)
 def load_mi_model():
     """ load mental illnesses model """
     
-    with open('mental_illness_rf_corpus.pkl', 'rb') as file:
+    with open('mental_illness_rf_final.pkl', 'rb') as file:
         data = pickle.load(file)
     return data
 
