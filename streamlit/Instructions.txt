@@ -16,4 +16,4 @@ nltk
 pandas
 sklearn
 
-
+This streamlit template is from https://github.com/giswqs/streamlit-multipage-template
