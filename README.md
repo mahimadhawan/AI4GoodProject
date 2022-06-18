@@ -1,6 +1,13 @@
 # MoodRing - an AI4Good project
 
-![alt text](https://github.com/mahimadhawan/AI4GoodProject/blob/main/logo.png?raw=true)
+
+<p align="center">
+  <img 
+    src="https://github.com/mahimadhawan/AI4GoodProject/blob/main/logo.png?raw=true"
+  >
+</p>
+
+
 
 ##
 ## Description

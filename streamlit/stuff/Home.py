@@ -1,7 +1,7 @@
 import streamlit as st
 
 
-st.title('Home')
+st.title('MoodRing')
 
 
 def display_home_page():
@@ -9,40 +9,29 @@ def display_home_page():
 
     # Customize the sidebar
     markdown = """
-    Web App URL: <INSERT HERE>
+    MoodRing is a mood journal web app that helps track & detect emotions and flag mental health symptoms based on text. This project was done as part of the 2022 AI4Good Lab.
 
-    GitHub Repository: <INSERT HERE>
     """
 
     st.sidebar.title("About")
     st.sidebar.info(markdown)
-    # logo = "IMAGE LINK"
-    # st.sidebar.image(logo)
+    logo = "https://github.com/mahimadhawan/AI4GoodProject/blob/main/logo.png?raw=true"
+    st.sidebar.image(logo, use_column_width='always')
 
-    # Customize page title
-    st.title("Mood journal")
 
-    st.markdown(
-        """
-        This is a mood journal
-        """
-    )
 
-    st.header("Instructions")
 
-    markdown = """
-    1. For the [GitHub repository](https://github.com/giswqs/streamlit-multipage-template) or [use it as a template](https://github.com/giswqs/streamlit-multipage-template/generate) for your own project.
-    2. Customize the sidebar by changing the sidebar text and logo in each Python files.
-    3. Find your favorite emoji from https://emojipedia.org.
-    4. Add a new app to the `pages/` directory with an emoji in the file name, e.g., `1_🚀_Chart.py`.
 
-    """
 
-    st.markdown(markdown)
+
+
+
+
 
 
 
-    st.title('Links')
+    st.markdown(markdown)
+    st.subheader('Links')
     link = '[Google](http://google.com)'
     st.markdown(link, unsafe_allow_html=True)
 

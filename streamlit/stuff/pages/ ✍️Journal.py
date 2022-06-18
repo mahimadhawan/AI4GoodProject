@@ -25,30 +25,18 @@ import torch
 st.set_page_config(layout="wide")
 
 markdown = """
-Web App URL: <INSERT>
-
-GitHub Repository: <INSERT>
+MoodRing is a mood journal web app that helps track & detect emotions and flag mental health symptoms based on text. This project was done as part of the 2022 AI4Good Lab.
 """
 
-st.sidebar.title("Journal")
+st.sidebar.title("About")
 st.sidebar.info(markdown)
-# logo = "IMAGE LINK"
-# st.sidebar.image(logo)
-
+logo = "https://github.com/mahimadhawan/AI4GoodProject/blob/main/logo.png?raw=true"
+st.sidebar.image(logo, use_column_width='always')
 
 # display app title & tagline
-st.title("MoodRing")
-st.write("Tell us about your day and we'll help tell you figure out how you feel.")
+st.header("Sarah's Journal")
+# st.write("What's on your mind?")
 
-# display about us section
-st.subheader("About Us")
-about_us_text = "We're doing a  project for AI4Good!"
-st.write(about_us_text)
-        
-
-
-
-##Helper functions + global vars
 
 # @st.cache(suppress_st_warning=True)
 def load_mi_model():
@@ -132,7 +120,7 @@ def clean_user_input(text):
 
 
 
-def use_mi_model(text):
+def get_mental_illness(text):
     """ use mental illness model & return results to user """
     if text != '':
         text = clean_user_input(text)
@@ -222,49 +210,46 @@ def get_emotion(text, tokenizer, model, trainer):
     return predicted_labels
 
 
+def display_mi_results(user_mi):
+    if user_mi == 'depression':
+        st.markdown('''
+            Your journal entry indiciates you might be experiencing symptoms of depression. You may want to discuss this with a mental health professional such as a physician or counselor.
+            If you’re in crisis or having an emergency, please call your doctor or 911 immediately.  
+            If you’re experiencing suicidal ideation, call 833-456-4566 anytime to speak to someone at the Canada Suicide Prevention Service. 
+            If you’re experiencing any of the above and located outside Canada, please call your local emergency line.
+
+            If you're not experiencing any of the above, there are other resources and information about depression you may find helpful:
 
 
-# display mental illness results to user
-def display_mi_results(mental_illness):
-    if mental_illness != 'neither':
-        st.write("You are displaying symptoms of %s." % mental_illness)
-        
-        if mental_illness == 'depression':
-            st.markdown('''
-                Call 911 or other emergency services immediately if:
-                
-                - You or someone you know is thinking seriously of suicide or has recently tried suicide. Serious signs include these thoughts:
-                - You have decided on how to kill yourself, such as with a weapon or medicines.
-                - You have set a time and place to do it.
-                - You think there is no other way to solve the problem or end the pain.
-                - You feel you can't stop from hurting yourself or someone else.
-                
-                Keep the number for a suicide crisis centre on or near your phone. Go to the Canadian Association for Suicide Prevention web page at http://suicideprevention.ca/need-help to find a suicide crisis prevention centre in your area.
-                
-                Call a doctor now if:
-                
-                - You hear voices.
-                - You have been thinking about death or suicide a lot, but you don't have a plan to harm yourself.
-                - You are worried that your feelings of depression or thoughts of suicide aren't going away.
-                
-                https://myhealth.alberta.ca/health/pages/conditions.aspx?Hwid=hw30709
-                Treatment for depression includes counselling, medicines, and lifestyle changes. Your treatment will depend on you and your symptoms. You and your health care team will work together to find the best treatment for you.
-                
-                - If you have moderate to severe symptoms, your doctor probably will suggest medicine or therapy or both.
-                - If you are using medicine, your doctor may have you try different medicines or a combination of medicines.
-                - You may need to go to the hospital if you show warning signs of suicide, such as having thoughts about harming yourself or another person, not being able to tell the difference between what is real and what is not (psychosis), or using a lot of alcohol or drugs.
-                ''')        
+            ''')    
+
+    elif user_mi=='anxiety':
+        st.markdown('''
+            Your journal entry indiciates you might be experiencing symptoms of anxiety. You may want to discuss this with a mental health professional such as a physician or counselor.
+
+            Other resources that you may find helpful include:
 
 
+            ''')    
+
+    elif user_mi=='ADHD':
+        st.markdown('''
+            Your journal entry indiciates you might be experiencing symptoms of ADHD. You may want to discuss this with a mental health professional such as a physician or counselor.
+
+            Other resources that you may find helpful include:
 
 
-
-
+            ''')  
 
 
 #################user display#########################
 
-st.subheader("New Journal Entry:")
+st.text("")
+st.text("")
+st.text("")
+# st.text("")
+
+st.subheader("What's on your mind?")
 
 tokenizer, model, trainer = load_emotion_model()
 load_mi_model()
@@ -274,19 +259,44 @@ load_mi_model()
 journal_entry = st.text_input("Enter text here:")
 
 
+negative_emotions = ['anger', 'fear', 'disgust', 'guilt', 'sadness']
+my_neg_emotions = []
+
 if journal_entry != '':
 
-    emotions = get_emotion(journal_entry, tokenizer, model, trainer)
+    user_emotions = get_emotion(journal_entry, tokenizer, model, trainer)
+    user_mi = get_mental_illness(journal_entry)
 
-    if len(emotions) > 0:
-        for i in range(len(emotions)):
-            temp = emotions[i]
-            st.write("You are displaying %s." %emotions[i])
-            st.write("\n")         
+    if len(user_emotions) > 0:
+        st.write("You seem to be experiencing the following emotions today: ")
+        for i in range(len(user_emotions)):
+            temp = user_emotions[i]
+            st.write('-', temp)
+            if temp in negative_emotions:
+                my_neg_emotions.append(temp)
 
 
-    mental_illness = use_mi_model(journal_entry)
-    display_mi_results(mental_illness)
+    if len(my_neg_emotions) > 0:
+         st.markdown('''
+            Based on your journal it seems you're feeling some negative emotions today. These feelings are unpleasant but also disruptive.
+
+            It's important to note that everyone experiences negative emotions sometimes, even if they don't have a mental illness. Understanding and accepting your emotions can help manage these feelings.
+
+            Some coping strategies for when you're feeling negative emotions are:
+
+
+
+            ''')
+
+    if user_mi != 'neither':
+        display_mi_results(user_mi) 
+
+    
+
+
+
+
+
 
 
 
