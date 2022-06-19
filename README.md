@@ -20,12 +20,14 @@ Our project is a mood journal which serves as a wellness tool. The app features 
 The goal of the project is to use machine learning to increase accessibility to mental health tools and information + promote mental well being via journaling (which is proven to have positive effects on mental health + help improve negative thought patterns). Many people are unable to invest time, energy, or money into their mental health. This app is important because it is a mental health tool that has a low barrier to entry and is also a low effort for the user. It’s a good use case for machine learning since it uses automation to help provide a mental health outlet to people who may otherwise not seek or be able to obtain help, and increase awareness if potential mental illness is flagged. The potential harms of this app could be causing people to self-diagnose mental illnesses, and there also needs to be strict measures to protect user privacy.
 
 
-## Data preparation
+## Machine Learning
+
+### Data preparation
 * We prepared the data by removing punctation and stopwords, and using stemming and lemmatization. For the mental illness detection model, we concatenated multiple data sources together.
 * We explored data via bar graphs and pie charts to view balance/imbalance and used word clouds and N-grams to identify common elements
 
 
-## Emotion classification
+### Emotion classification
 * Data:
     * The Cleaned Balanced Emotional Tweets (CBET) dataset (see citations)
 * Machine learning:
@@ -34,7 +36,7 @@ The goal of the project is to use machine learning to increase accessibility to 
     * Achieved an ROC score of 0.89, an f1 score of 0.83, and an accuracy of 0.78
 
 
-## Mental illness detection
+### Mental illness detection
 * Data: 
     * the inputs for this model were social media comments labeled as one of four categories: depression, anxiety, ADHD, or neither/control. The data was collected from the sources listed under ‘Citations and Resources’. 
     * The comments for the depression, anxiety, and control were from Twitter. We were unable to find a data source of labeled tweets for ADHD, so those comments came from reddit and we restricted the length to make them more equal with the length of tweets.
@@ -44,6 +46,9 @@ The goal of the project is to use machine learning to increase accessibility to 
     * We did feature extraction using bag of words to train our model
     * Achieved an f1 score of 0.98 and an accuracy score of 0.93
 
+### Challenges we encountered along the way:
+* Looking for data sources and pre-processing it was by far the most time consuming task in our project.
+* Tuning hyperparameters to avoid overfitting, especially with random forest
 
 ## Instructions
 1) Make sure requirements (listed below) are installed on your machine
@@ -52,22 +57,11 @@ The goal of the project is to use machine learning to increase accessibility to 
 4) Navigate to the folder on your terminal
 5) type 'streamlit run Home.py'
 
-
-Requirements:
-streamlit
-transformers
-torch
-nltk
-pandas
-sklearn
+Requirements: streamlit, transformers, torch, nltk, pandas, sklearn
 
 
 ## Future directions
-Challenges we encountered along the way:
-* Looking for data sources and pre-processing it was by far the most time consuming task in our project.
-* Tuning hyperparameters to avoid overfitting, especially with random forest
-* If we had more time we would want to improve our models and add additional features to the app (listed below), as well as include more emotions and mental illnesses in our models. 
-How would you take your project further if you could extend it / have more time?
+* If we had more time we would want to improve our models and add additional features to the app (listed below), as well as include more emotions and mental illnesses in our classification categories.
 * Improve our UI & also make it available as a mobile app
 * Improving our prediction models and also broadening the scope by gathering new data. We would like to add more emotions to the prediction categories such as lonely, stressed, excited, etc. We would also like to add more mental illnesses to the mental illness detection model. We chose to 
 * Some features we would like to app to our app:
@@ -82,10 +76,10 @@ How would you take your project further if you could extend it / have more time?
 * Cleaned Balanced Emotional Tweets (CBET) Dataset
 
 @inproceedings{shahraki2017lexical,
-  title={Lexical and learning-based emotion mining from text},
-  author={Shahraki, Ameneh Gholipour and Za\"{i}ane, Osmar R},
-  booktitle={Proceedings of the International Conference on Computational Linguistics and Intelligent Text Processing},
-  year={2017}
+  title={Lexical and learning-based emotion mining from text},
+  author={Shahraki, Ameneh Gholipour and Za\"{i}ane, Osmar R},
+  booktitle={Proceedings of the International Conference on Computational Linguistics and Intelligent Text Processing},
+  year={2017}
 }
 
 * big_anxiety.csv and big_normal.csv: https://github.com/caciitg/UTrack/tree/main/Extracted%20Tweets 
