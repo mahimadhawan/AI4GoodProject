@@ -75,11 +75,11 @@ Requirements: streamlit, transformers, torch, nltk, pandas, sklearn
 
 * Cleaned Balanced Emotional Tweets (CBET) Dataset
 
-@inproceedings{shahraki2017lexical,
-  title={Lexical and learning-based emotion mining from text},
-  author={Shahraki, Ameneh Gholipour and Za\"{i}ane, Osmar R},
-  booktitle={Proceedings of the International Conference on Computational Linguistics and Intelligent Text Processing},
-  year={2017}
+@inproceedings{shahraki2017lexical,  
+title={Lexical and learning-based emotion mining from text},  
+author={Shahraki, Ameneh Gholipour and Za\"{i}ane, Osmar R},  
+booktitle={Proceedings of the International Conference on Computational Linguistics and Intelligent Text Processing},  
+year={2017}
 }
 
 * big_anxiety.csv and big_normal.csv: https://github.com/caciitg/UTrack/tree/main/Extracted%20Tweets 
