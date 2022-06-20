@@ -53,7 +53,7 @@ The goal of the project is to use machine learning to increase accessibility to 
 ## Instructions
 1) Make sure requirements (listed below) are installed on your machine
 2) Download this 'streamlit' folder
-3) Unzip 'model2.zip' and 'pytorch_model_bin.zip'
+3) Unzip 'mental_illness_rf_final.pkl.zip'
 4) Navigate to the folder on your terminal
 5) type 'streamlit run Home.py'
 
