@@ -256,7 +256,7 @@ load_mi_model()
 
 
 # collect journal entry from user
-journal_entry = st.text_input("Enter text here:")
+journal_entry = st.text_input("New journal entry:")
 
 
 negative_emotions = ['anger', 'fear', 'disgust', 'guilt', 'sadness']
@@ -267,29 +267,43 @@ if journal_entry != '':
     user_emotions = get_emotion(journal_entry, tokenizer, model, trainer)
     user_mi = get_mental_illness(journal_entry)
 
-    if len(user_emotions) > 0:
-        st.write("You seem to be experiencing the following emotions today: ")
-        for i in range(len(user_emotions)):
-            temp = user_emotions[i]
-            st.write('-', temp)
-            if temp in negative_emotions:
-                my_neg_emotions.append(temp)
 
 
-    if len(my_neg_emotions) > 0:
-         st.markdown('''
-            Based on your journal it seems you're feeling some negative emotions today. These feelings are unpleasant but also disruptive.
+    col1, col2, col3 = st.columns([3, 0.5, 3])
 
-            It's important to note that everyone experiences negative emotions sometimes, even if they don't have a mental illness. Understanding and accepting your emotions can help manage these feelings.
+    with col1:
+        if len(user_emotions) > 0:
+            st.write("You seem to be experiencing the following emotions today: ")
+            for i in range(len(user_emotions)):
+                temp = user_emotions[i]
+                st.write('-', temp)
+                if temp in negative_emotions:
+                    my_neg_emotions.append(temp)
 
-            Some coping strategies for when you're feeling negative emotions are:
+
+        if len(my_neg_emotions) > 0:
+             st.markdown('''
+                Based on your journal it seems you're feeling some negative emotions today. These feelings are unpleasant but also disruptive.
+
+                It's important to note that everyone experiences negative emotions sometimes, even if they don't have a mental illness. Understanding and accepting your emotions can help manage these feelings.
+
+                Some coping strategies for when you're feeling negative emotions are:
 
 
 
             ''')
 
-    if user_mi != 'neither':
-        display_mi_results(user_mi) 
+             st.write('-')
+             st.write('-')
+
+
+
+    with col2:
+        st.write('')
+
+    with col3:
+        if user_mi != 'neither':
+            display_mi_results(user_mi) 
 
     
 

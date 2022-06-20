@@ -37,10 +37,10 @@ mylabels = ['anger',
 with st.expander("Visualizations"):
 # expander1.write('asdnla')
     with st.container():
-        st.write('Mood distribution over past week:')
+        # st.write('Mood distribution over past week:')
 
         options = ['Donut chart', 'Bar chart', 'Patterns over time']
-        basemap = st.selectbox("View previous journal entries:", options)
+        basemap = st.selectbox("View mood distribution over past 30 days:", options)
 
         #dummy in data
         y = ([20,30, 10, 10, 15, 5, 5, 15, 2])
@@ -68,5 +68,39 @@ with st.expander("Visualizations"):
 
 
 with st.expander("Statistics"):
-    st.write('')
+    # col1, col2, col3 = st.columns(3)
+
+    col1, col2 = st.columns(2)
+
+    with col1:
+        st.write("Positive emotions:")
+
+        st.write("- 25% in the past month")
+
+
+
+
+        st.write("- 40% in the past year")
+
+        # col3, col4 = st.columns(2)
+
+        # with col3:
+        #     st.subheader("25% in the past month")
+
+        # with col4:
+        #     st.subheader("30% all time")
+            
+
+
+
+        # st.image("https://static.streamlit.io/examples/cat.jpg")
+
+    with col2:
+        st.write("Negative emotions:")
+        # st.image("https://static.streamlit.io/examples/dog.jpg")
+
+        st.write("- 75% in the past month")
+
+
+        st.write("- 60% in the past year")
 
